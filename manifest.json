@@ -1,0 +1,85 @@
+{
+  "manifest_version": 3,
+  "name": "WebScraping Intelligence Suite v3.3.0",
+  "version": "3.3.0",
+  "description": "Sistema profesional de análisis web con Connection Monitor, Dual AI, parser corregido y comunicación mejorada",
+  
+  "permissions": [
+    "cookies",
+    "activeTab", 
+    "storage",
+    "tabs",
+    "notifications",
+    "scripting",
+    "webNavigation",
+    "downloads",
+    "webRequest",
+    "declarativeNetRequest",
+    "background",
+    "unlimitedStorage",
+    "contextMenus",
+    "alarms"
+  ],
+  
+  "host_permissions": [
+    "*://*.google.com/*",
+    "*://*.gemini.google.com/*",
+    "*://*.googleusercontent.com/*",
+    "*://*.googleapis.com/*",
+    "*://aistudio.google.com/*",
+    "*://generativelanguage.googleapis.com/*",
+    "*://api.deepseek.com/*",
+    "*://api.perplexity.ai/*",
+    "*://api.openai.com/*",
+    "<all_urls>"
+  ],
+  
+  "background": {
+    "service_worker": "background.js"
+  },
+  
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.google.com/*",
+        "*://*.gemini.google.com/*",
+        "*://aistudio.google.com/*",
+        "*://*/*"
+      ],
+      "js": ["content.js"],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ],
+  
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "WebScraping Intelligence Suite v3.3.0"
+  },
+  
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "content.js",
+        "ExtensionConnector.js",
+        "popup.html"
+      ],
+      "matches": ["<all_urls>"]
+    }
+  ],
+  
+  "externally_connectable": {
+    "matches": [
+      "*://*.google.com/*",
+      "*://*.gemini.google.com/*",
+      "*://aistudio.google.com/*",
+      "*://*.googleapis.com/*"
+    ]
+  },
+  
+  "minimum_chrome_version": "88",
+  
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'; connect-src 'self' https://api.deepseek.com https://generativelanguage.googleapis.com https://api.perplexity.ai https://api.openai.com"
+  }
+}
